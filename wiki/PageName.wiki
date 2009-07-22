@@ -1,0 +1,34 @@
+#summary One-sentence summary of this page.
+
+= Запрос книги =
+Данный запрос рассылается по случайному количеству IP адресов клиентов. Если там не находится такой книги, они рассылаются далее с тех клиентов, куда был направлен запрос. 
+
+<libp2p.request>
+<to>This_UserInnerName</to>
+<to_ip>127.0.0.1</to_ip>
+<book_hash>md5</book_hash>
+</libp2p.request>
+
+
+= Выдача книги =
+Данная серия ответов пересылается случайному клиенту сети. При пересылке проверяется целостность каждого фрагмента и временный хеш файла также. В зависимости от параметра secure_level пересылка повторяется необходимое количество раз. Потом файл отправляется на to_ip.
+
+<libp2p.request>
+<temp_hash>temporary_md5_book_hash</temp_hash>
+<to_ip>127.0.0.1</to_ip>
+<part_hash>md5</part_hash>
+<part>encoded_64b_part_of_file</part>
+<part_n>integer</part_n>
+<secure_level>1</secure_level>
+</libp2p.request>
+
+= Обновление базы данных =
+Рассылается по нескольким случайным адресам. С них - дальше
+<libp2p.request>
+<add>book_name</add>
+<hash>book_hash</hash>
+<author>author_name</author>
+<author>author_name</author>
+<author>author_name</author>
+<description>book_description</description>
+</libp2p.request>
